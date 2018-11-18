@@ -50,6 +50,9 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e =>  {
   const responseCaches = caches.match(e.request)
-    .then(res => res ? res: fetch(e.request).then(newRes => updateCacheDynamic(CACHE_DYNAMIC, e.request, newRes)))
+    .then(res => {
+      if(!res) return fetch(e.request).then(newRes => updateCache(CACHE_DYNAMIC, e.request, newRes))
+      return res
+    })
   e.respondWith(responseCaches)
 })

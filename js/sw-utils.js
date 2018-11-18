@@ -1,4 +1,4 @@
-const updateCacheDynamic = (cacheName, req, res) => {
+const updateCache = (cacheName, req, res) => {
   if(res.ok){
     return caches.open(cacheName)
       .then(cache => {
